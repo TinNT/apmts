@@ -1,0 +1,8 @@
+tmp/*
+log/*
+nbproject/*
+public/assets/*
+.DS_Store
+test/dummy/tmp/*
+test/dummy/log/*
+test/dummy/log/development.log

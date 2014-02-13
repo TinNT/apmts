@@ -1,0 +1,43 @@
+= Booking
+
+Installation
+------------
+
+Add booking to your Gemfile:
+
+
+  gem 'booking'
+
+
+Bundle your dependencies and run the installation generator:
+
+  bundle
+  bundle exec rails g booking:install
+
+Declare routes
+
+  mount Booking::Engine => "/booking"
+
+Create Single Event
+
+  Booking::Event.create :title => 'title', :description => 'description', :starttime => Time.current, :endtime => Time.current + 10.minute
+
+Create Event Series
+
+  Booking::EventSeries.create :title => 'title', :description => 'description', :starttime => Time.current, :endtime => Time.current + 10.minute, :period => 'Daily|monthly|yearly', :frequency => '4'
+This project rocks and uses MIT-LICENSE.
+
+Configuration Options
+  create config/fullcalendar.yml
+  
+  'editable': true
+  'header': {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+          }
+  'defaultView': 'agendaWeek'
+  'height': 500
+  'slotMinutes': 15
+  'dragOpacity': 0.5
+  'selectable': true

@@ -1,0 +1,13 @@
+development:
+  adapter: mysql2
+  host: localhost
+  port: 3306
+  database: booking_dev
+  username: root
+
+test: &TEST
+  adapter: mysql2
+  host: localhost
+  port: 3306
+  database: booking_dev
+  username: root
