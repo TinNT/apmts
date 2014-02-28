@@ -11,29 +11,54 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131203105529) do
+ActiveRecord::Schema.define(:version => 20140228102740) do
 
-  create_table "booking_event_series", :force => true do |t|
-    t.integer  "frequency",  :default => 1
-    t.string   "period",     :default => "monthly"
-    t.datetime "starttime"
-    t.datetime "endtime"
-    t.boolean  "all_day",    :default => false
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+  create_table "booking_entries", :force => true do |t|
+    t.integer  "persona_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "source"
+    t.datetime "move_in"
+    t.datetime "deleted_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "booking_events", :force => true do |t|
-    t.string   "title"
-    t.datetime "starttime"
-    t.datetime "endtime"
-    t.boolean  "all_day",         :default => false
+    t.integer  "service_id"
+    t.integer  "entry_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.text     "description"
-    t.integer  "event_series_id"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "booking_events", ["event_series_id"], :name => "index_booking_events_on_event_series_id"
+  create_table "booking_schedules", :force => true do |t|
+    t.integer  "service_id"
+    t.string   "name"
+    t.integer  "day"
+    t.boolean  "day_off"
+    t.integer  "from_hour"
+    t.integer  "from_min"
+    t.integer  "to_hour"
+    t.integer  "to_min"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "booking_services", :force => true do |t|
+    t.integer  "persona_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "duration"
+    t.integer  "participant"
+    t.datetime "deleted_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end

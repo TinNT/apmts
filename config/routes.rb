@@ -1,10 +1,12 @@
 Booking::Engine.routes.draw do
-  root :to => 'events#index'
-  resources :events do 
-    collection do 
-      get :get_events
-      post :move
-      post :resize
-    end
-  end
+  resources :services
+  
+  resources :schedules
+
+  resources :events
+
+  resources :entries
+
+  root :to => 'services#index'
+  
 end

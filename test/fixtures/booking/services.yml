@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  persona_id: 1
+  user_id: 1
+  name: MyString
+  description: MyText
+  duration: 1
+  participant: 1
+  deleted_at: 2014-02-28 17:27:22
+
+two:
+  persona_id: 1
+  user_id: 1
+  name: MyString
+  description: MyText
+  duration: 1
+  participant: 1
+  deleted_at: 2014-02-28 17:27:22

@@ -18,15 +18,6 @@ Declare routes
 
   mount Booking::Engine => "/booking"
 
-Create Single Event
-
-  Booking::Event.create :title => 'title', :description => 'description', :starttime => Time.current, :endtime => Time.current + 10.minute
-
-Create Event Series
-
-  Booking::EventSeries.create :title => 'title', :description => 'description', :starttime => Time.current, :endtime => Time.current + 10.minute, :period => 'Daily|monthly|yearly', :frequency => '4'
-This project rocks and uses MIT-LICENSE.
-
 Configuration Options
   create config/fullcalendar.yml
   

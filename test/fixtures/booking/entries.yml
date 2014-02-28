@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  persona_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  source: MyString
+  move_in: 2014-02-28 17:27:40
+  deleted_at: 2014-02-28 17:27:40
+
+two:
+  persona_id: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  source: MyString
+  move_in: 2014-02-28 17:27:40
+  deleted_at: 2014-02-28 17:27:40

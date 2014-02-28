@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  service_id: 1
+  name: MyString
+  day: 1
+  day_off: false
+  from_hour: 1
+  from_min: 1
+  to_hour: 1
+  to_min: 1
+
+two:
+  service_id: 1
+  name: MyString
+  day: 1
+  day_off: false
+  from_hour: 1
+  from_min: 1
+  to_hour: 1
+  to_min: 1

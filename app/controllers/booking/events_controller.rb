@@ -1,98 +1,87 @@
 require_dependency "booking/application_controller"
-require 'pp'
 
 module Booking
   class EventsController < ApplicationController
-
-    def create
-      pp event_params 
-      if params[:event][:period] == "Does not repeat"
-        event = Event.new(event_params)
-      else
-        #      @event_series = EventSeries.new(:frequency => params[:event][:frequency], :period => params[:event][:repeats], :starttime => params[:event][:starttime], :endtime => params[:event][:endtime], :all_day => params[:event][:all_day])
-        event = EventSeries.new(event_params)
-      end
-      if event.save
-        render :nothing => true
-      else
-        render :text => event.errors.full_messages.to_sentence, :status => 422
+    # GET /events
+    # GET /events.json
+    def index
+      @events = Event.all
+  
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @events }
       end
     end
-
-    def get_events
-      @events = Event.where("starttime >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and endtime <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'")
-      events = [] 
-      @events.each do |event|
-        events << {:id => event.id, :title => event.title, :description => event.description || "Some cool description here...", :start => "#{event.starttime.iso8601}", :end => "#{event.endtime.iso8601}", :allDay => event.all_day, :recurring => (event.event_series_id)? true: false}
+  
+    # GET /events/1
+    # GET /events/1.json
+    def show
+      @event = Event.find(params[:id])
+  
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @event }
       end
-      render :text => events.to_json
     end
-
-
-
-    def move
-      @event = Event.where(:id => params[:id]).first
-      if @event
-        @event.starttime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.starttime))
-        @event.endtime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.endtime))
-        @event.all_day = params[:all_day]
-        @event.save
+  
+    # GET /events/new
+    # GET /events/new.json
+    def new
+      @event = Event.new
+  
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @event }
       end
-      render :nothing => true
     end
-
-
-    def resize
-      @event = Event.where(:id => params[:id]).first
-      if @event
-        @event.endtime = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.endtime))
-        @event.save
-      end    
-      render :nothing => true
-    end
-
+  
+    # GET /events/1/edit
     def edit
-      @event = Event.where(:id => params[:id]).first
-      render :json => { :form => render_to_string(:partial => 'edit_form') } 
+      @event = Event.find(params[:id])
     end
-
+  
+    # POST /events
+    # POST /events.json
+    def create
+      @event = Event.new(params[:event])
+  
+      respond_to do |format|
+        if @event.save
+          format.html { redirect_to @event, notice: 'Event was successfully created.' }
+          format.json { render json: @event, status: :created, location: @event }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  
+    # PUT /events/1
+    # PUT /events/1.json
     def update
-      @event = Event.where(:id => params[:event][:id]).first
-      if params[:event][:commit_button] == "Update All Occurrence"
-        @events = @event.event_series.events #.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
-        @event.update_events(@events, event_params)
-      elsif params[:event][:commit_button] == "Update All Following Occurrence"
-        @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
-        @event.update_events(@events, event_params)
-      else
-        @event.attributes = event_params
-        @event.save
+      @event = Event.find(params[:id])
+  
+      respond_to do |format|
+        if @event.update_attributes(params[:event])
+          format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       end
-      render :nothing => true    
-    end  
-
-    def destroy
-      @event = Event.where(:id => params[:id]).first
-      if params[:delete_all] == 'true'
-        @event.event_series.destroy
-      elsif params[:delete_all] == 'future'
-        @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
-        @event.event_series.events.delete(@events)
-      else
-        @event.destroy
-      end
-      render :nothing => true   
     end
-
-    private
-      def event_params
-        #params.require(:event).permit('title', 'description', 'starttime(1i)', 'starttime(2i)', 'starttime(3i)', 'starttime(4i)', 'starttime(5i)', 'endtime(1i)', 'endtime(2i)', 'endtime(3i)', 'endtime(4i)', 'endtime(5i)', 'all_day', 'period', 'frequency', 'commit_button')
-        params[:event]
+  
+    # DELETE /events/1
+    # DELETE /events/1.json
+    def destroy
+      @event = Event.find(params[:id])
+      @event.destroy
+  
+      respond_to do |format|
+        format.html { redirect_to events_url }
+        format.json { head :no_content }
       end
-      
-      def convert_time(hash, field)
-        field = field.to_s
-        return DateTime.new(hash[field + '(1i)'].to_i, hash[field + '(2i)'].to_i, hash[field + '(3i)'].to_i, hash[field + '(4i)'].to_i, hash[field + '(5i)'].to_i)   
-      end
+    end
   end
 end

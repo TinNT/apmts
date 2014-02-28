@@ -1,39 +1,37 @@
-<%#remote_form_for @event, :url => {:action => :create}, :before => "$('#creating_events').show();", :complete => "$('#creating_events').hide();" do |f| %>
-<%= form_for @event ||= Booking::Event.new, :html => { :id => 'event_form' } do |f| %>
-<p>
-  <%=f.label :title %>
-  <br/>
-  <%=f.text_field :title %>
-</p>
-<p>
-  <%=f.label :description %>
-  <br/>
-  <%=f.text_area :description, :rows => 4, :cols => 30 %>
-</p>
-<p>
-  <%=f.label :starttime, 'Start Time' %>
-  <br/>
-  <%=f.datetime_select :starttime %>
-</p>
-<p>
-  <%=f.label :endtime, 'End Time' %>
-  <br/>
-  <%=f.datetime_select :endtime %>
-</p>
-<p>
-  <%=f.label :all_day %>
-  <%=f.check_box :all_day %>
-</p>
-<p>
-  <%=f.label :period, "Repeats" %>
-  <%=f.select :period, Booking::Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);" %>
-</p>
-<p id = "frequency" style = "display:none;">
-  <%=f.label :frequency, "Repeat every" %>
-  <%=f.select :frequency, (1..30).to_a %> <span id = "period"></span>
-</p>
-<%=f.hidden_field :id, :value => @event.id %>
-<p>
-  <%=f.submit 'Create' %> <span id = "creating_events" class="spinner" style = "display:none;">Creating, Please wait...</span>
-</p>
-<%end %>
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :service_id %><br />
+    <%= f.number_field :service_id %>
+  </div>
+  <div class="field">
+    <%= f.label :entry_id %><br />
+    <%= f.number_field :entry_id %>
+  </div>
+  <div class="field">
+    <%= f.label :start_at %><br />
+    <%= f.datetime_select :start_at %>
+  </div>
+  <div class="field">
+    <%= f.label :end_at %><br />
+    <%= f.datetime_select :end_at %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

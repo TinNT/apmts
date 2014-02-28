@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Service:</b>
+  <%= @schedule.service_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @schedule.name %>
+</p>
+
+<p>
+  <b>Day:</b>
+  <%= @schedule.day %>
+</p>
+
+<p>
+  <b>Day off:</b>
+  <%= @schedule.day_off %>
+</p>
+
+<p>
+  <b>From hour:</b>
+  <%= @schedule.from_hour %>
+</p>
+
+<p>
+  <b>From min:</b>
+  <%= @schedule.from_min %>
+</p>
+
+<p>
+  <b>To hour:</b>
+  <%= @schedule.to_hour %>
+</p>
+
+<p>
+  <b>To min:</b>
+  <%= @schedule.to_min %>
+</p>
+
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>
