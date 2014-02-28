@@ -1,6 +1,6 @@
-class CreateBookingSchedules < ActiveRecord::Migration
+class CreateBookingServiceSettings < ActiveRecord::Migration
   def change
-    create_table :booking_schedules do |t|
+    create_table :booking_service_settings do |t|
       t.integer :service_id
       t.string :name
       t.integer :day

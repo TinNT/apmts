@@ -2,6 +2,11 @@ require_dependency "booking/application_controller"
 
 module Booking
   class ServicesController < ApplicationController
+    before_filter :require_user
+    before_filter :get_page
+    before_filter :get_service, :except => [:index, :new, :create]
+    before_filter :set_page_title
+    
     # GET /services
     # GET /services.json
     def index
@@ -83,5 +88,20 @@ module Booking
         format.json { head :no_content }
       end
     end
+    
+    protected
+    
+      def get_page
+        @page = current_user.admin_page(params[:page_id])
+        Time.zone = @page.setting.tz
+      end
+
+      def get_service
+        @service = @page.services.find(params[:id])
+      end
+
+      def set_page_title
+        @page_title = "Hy.ly - #{@page.name} - Booking Services"
+      end
   end
 end

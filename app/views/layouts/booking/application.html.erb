@@ -7,7 +7,7 @@
   
   <title> <%= @page_title || controller_name %> </title>
   
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "booking/application", :media => "all" %>
   
   <style tyoe="text/css">
     body {
@@ -15,7 +15,7 @@
     }
   </style>
   
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "booking/application" %>
   <%= csrf_meta_tags %>
   
   <%= yield :css %>

@@ -1,11 +1,14 @@
 Booking::Engine.routes.draw do
-  resources :services
+
+  scope  "/:page_id" do
+    resources :services do
+      resources :events
+    end
+  
+    resources :entries
+  end
   
   resources :schedules
-
-  resources :events
-
-  resources :entries
 
   root :to => 'services#index'
   

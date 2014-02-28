@@ -1,44 +1,29 @@
 <%= form_for(@service) do |f| %>
-  <% if @service.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
-
-      <ul>
-      <% @service.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "layouts/booking/error_messages", :target => @service %>
 
   <div class="form-group">
-    <%= f.label :persona_id %><br />
-    <%= f.number_field :persona_id, :class => "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id, :class => "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :description %><br />
+    <%= f.label :description %>
     <%= f.text_area :description, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :duration %><br />
+    <%= f.label :duration %>
     <%= f.number_field :duration, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :participant %><br />
+    <%= f.label :participant %>
     <%= f.number_field :participant, :class => "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :deleted_at %><br />
-    <%= f.datetime_select :deleted_at, :class => "form-control" %>
-  </div>
+  
+  <%= f.fields_for :settings do |builder| %>
+    <div class="well">
+      <%= render "setting_fields", :f => builder %>
+    </div>
+  <% end %>
+  
   <div class="form-group">
     <%= f.submit nil, :class => "btn btn-primary" %>
   </div>

@@ -1,5 +1,15 @@
 module Booking
   class Service < ActiveRecord::Base
-    attr_accessible :deleted_at, :description, :duration, :name, :participant, :persona_id, :user_id
+    
+    belongs_to :user
+    belongs_to :persona
+    
+    has_many :events
+    has_many :settings, :class_name => "ServiceSetting", :dependent => :destroy
+    
+    accepts_nested_attributes_for :settings, :allow_destroy => true
+    
+    validates :persona_id, :user_id, :name, :participant, :presence => true
+    
   end
 end

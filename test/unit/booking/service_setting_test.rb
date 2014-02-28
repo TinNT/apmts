@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Booking
-  class ScheduleTest < ActiveSupport::TestCase
+  class ServiceSettingTest < ActiveSupport::TestCase
     # test "the truth" do
     #   assert true
     # end

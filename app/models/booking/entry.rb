@@ -1,5 +1,8 @@
 module Booking
   class Entry < ActiveRecord::Base
-    attr_accessible :deleted_at, :email, :first_name, :last_name, :move_in, :persona_id, :phone, :source
+    belongs_to :persona
+    
+    validates :persona_id, :email, :first_name, :last_name, :phone, :move_in, :presence => true
+    
   end
 end
