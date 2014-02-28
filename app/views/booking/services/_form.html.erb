@@ -11,35 +11,35 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :persona_id %><br />
-    <%= f.number_field :persona_id %>
+    <%= f.number_field :persona_id, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.number_field :user_id, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :duration %><br />
-    <%= f.number_field :duration %>
+    <%= f.number_field :duration, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :participant %><br />
-    <%= f.number_field :participant %>
+    <%= f.number_field :participant, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :deleted_at %><br />
-    <%= f.datetime_select :deleted_at %>
+    <%= f.datetime_select :deleted_at, :class => "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit nil, :class => "btn btn-primary" %>
   </div>
 <% end %>

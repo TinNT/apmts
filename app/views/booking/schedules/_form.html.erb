@@ -11,39 +11,39 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :service_id %><br />
-    <%= f.number_field :service_id %>
+    <%= f.number_field :service_id, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :day %><br />
-    <%= f.number_field :day %>
+    <%= f.number_field :day, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :day_off %><br />
     <%= f.check_box :day_off %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :from_hour %><br />
-    <%= f.number_field :from_hour %>
+    <%= f.number_field :from_hour, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :from_min %><br />
-    <%= f.number_field :from_min %>
+    <%= f.number_field :from_min, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :to_hour %><br />
-    <%= f.number_field :to_hour %>
+    <%= f.number_field :to_hour, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :to_min %><br />
-    <%= f.number_field :to_min %>
+    <%= f.number_field :to_min, :class => "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit nil, :class => "btn btn-primary" %>
   </div>
 <% end %>

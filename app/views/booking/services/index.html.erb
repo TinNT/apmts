@@ -1,6 +1,6 @@
 <h1>Listing services</h1>
 
-<table>
+<table class="table table-bordered">
   <tr>
     <th>Persona</th>
     <th>User</th>
@@ -23,13 +23,13 @@
     <td><%= service.duration %></td>
     <td><%= service.participant %></td>
     <td><%= service.deleted_at %></td>
-    <td><%= link_to 'Show', service %></td>
-    <td><%= link_to 'Edit', edit_service_path(service) %></td>
-    <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', service, :class => "btn btn-default" %></td>
+    <td><%= link_to 'Edit', edit_service_path(service), :class => "btn btn-default" %></td>
+    <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Service', new_service_path %>
+<%= link_to 'New Service', new_service_path, :class => "btn btn-default" %>

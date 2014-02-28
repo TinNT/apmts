@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_tree .
+//= require booking/underscore-min
+//= require booking/backbone-min
+//= require booking/app

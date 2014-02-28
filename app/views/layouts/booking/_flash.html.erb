@@ -1,0 +1,16 @@
+<div id="msgbox"><h2></h2></div>
+
+<% if flash[:notice] %>
+  <script type="text/javascript">
+    $(function(){
+      msgbox("<%= j(raw flash[:notice]) %>", 4500);
+    });
+  </script>
+<% end %>
+
+<% if flash[:error] %>
+  <div class="alert alert-danger alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    <%= raw flash[:error]  %>
+  </div>
+<% end %>

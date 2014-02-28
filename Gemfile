@@ -18,7 +18,7 @@ gem 'jquery-rails', '~> 3.0.4'
 
 gem "therubyracer", "~> 0.12.0"
 gem "less-rails", "2.4.2"
-gem "twitter-bootstrap-rails", :git => 'git://github.com/TinNT/twitter-bootstrap-rails.git', :branch => "bootstrap3"
+gem "twitter-bootstrap-rails", :git => 'git://github.com/TinNT/twitter-bootstrap-rails.git', :branch => "bootstrap3.1.1"
 
 gem 'mysql2', '~> 0.3.11'
 gem "ejs", "~> 1.1.1"
