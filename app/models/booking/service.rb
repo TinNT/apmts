@@ -1,5 +1,6 @@
 module Booking
   class Service < ActiveRecord::Base
+    include MultiTenant::RandomPrimaryKeyHelper
     
     belongs_to :user
     belongs_to :persona

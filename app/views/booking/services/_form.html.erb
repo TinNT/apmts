@@ -1,4 +1,4 @@
-<%= form_for(@service) do |f| %>
+<%= form_for(@service, :url => @service.new_record? ? services_path(@page, @service) : service_path(@page, @service)) do |f| %>
   <%= render "layouts/booking/error_messages", :target => @service %>
 
   <div class="form-group">
@@ -7,14 +7,14 @@
   </div>
   <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description, :class => "form-control" %>
+    <%= f.text_area :description, :class => "form-control", :rows => 3 %>
   </div>
   <div class="form-group">
-    <%= f.label :duration %>
+    <%= f.label :duration, "Duration (minute)" %>
     <%= f.number_field :duration, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :participant %>
+    <%= f.label :participant, "Participant Number (reservation per time slot)" %>
     <%= f.number_field :participant, :class => "form-control" %>
   </div>
   

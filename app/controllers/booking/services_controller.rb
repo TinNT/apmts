@@ -10,7 +10,7 @@ module Booking
     # GET /services
     # GET /services.json
     def index
-      @services = Service.all
+      @services = @page.services.all
   
       respond_to do |format|
         format.html # index.html.erb
@@ -21,8 +21,6 @@ module Booking
     # GET /services/1
     # GET /services/1.json
     def show
-      @service = Service.find(params[:id])
-  
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @service }
@@ -32,8 +30,17 @@ module Booking
     # GET /services/new
     # GET /services/new.json
     def new
-      @service = Service.new
-  
+      @service = @page.services.new
+      
+      #default: 8:30 => 16:30. breaks: 11:30, 12:00
+      @service.settings.build(:name => "Monday", :day => 0 )
+      @service.settings.build(:name => "Tuesday", :day => 1 )
+      @service.settings.build(:name => "Wednesday", :day => 2 )
+      @service.settings.build(:name => "Thursday", :day => 3 )
+      @service.settings.build(:name => "Friday", :day => 4 )
+      @service.settings.build(:name => "Saturday", :day => 5, :day_off => true )
+      @service.settings.build(:name => "Sunday", :day => 6, :day_off => true )
+      
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @service }
@@ -42,17 +49,17 @@ module Booking
   
     # GET /services/1/edit
     def edit
-      @service = Service.find(params[:id])
     end
   
     # POST /services
     # POST /services.json
     def create
-      @service = Service.new(params[:service])
+      @service = @page.services.new(params[:service])
+      @service.user = current_user
   
       respond_to do |format|
         if @service.save
-          format.html { redirect_to @service, notice: 'Service was successfully created.' }
+          format.html { redirect_to service_url(@page, @service), notice: 'Service was successfully created.' }
           format.json { render json: @service, status: :created, location: @service }
         else
           format.html { render action: "new" }
@@ -64,11 +71,9 @@ module Booking
     # PUT /services/1
     # PUT /services/1.json
     def update
-      @service = Service.find(params[:id])
-  
       respond_to do |format|
         if @service.update_attributes(params[:service])
-          format.html { redirect_to @service, notice: 'Service was successfully updated.' }
+          format.html { redirect_to service_url(@page, @service), notice: 'Service was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }
@@ -80,11 +85,10 @@ module Booking
     # DELETE /services/1
     # DELETE /services/1.json
     def destroy
-      @service = Service.find(params[:id])
       @service.destroy
   
       respond_to do |format|
-        format.html { redirect_to services_url }
+        format.html { redirect_to services_url(@page) }
         format.json { head :no_content }
       end
     end
@@ -101,7 +105,7 @@ module Booking
       end
 
       def set_page_title
-        @page_title = "Hy.ly - #{@page.name} - Booking Services"
+        @page_title = "Hy.ly - #{@page.name} - Services"
       end
   end
 end

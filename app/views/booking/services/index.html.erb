@@ -2,34 +2,32 @@
 
 <table class="table table-bordered">
   <tr>
-    <th>Persona</th>
+    <th>Property</th>
     <th>User</th>
     <th>Name</th>
     <th>Description</th>
-    <th>Duration</th>
-    <th>Participant</th>
-    <th>Deleted at</th>
+    <th>Duration (min)</th>
+    <th>Participant Number</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @services.each do |service| %>
+<% @services.each do |s| %>
   <tr>
-    <td><%= service.persona_id %></td>
-    <td><%= service.user_id %></td>
-    <td><%= service.name %></td>
-    <td><%= service.description %></td>
-    <td><%= service.duration %></td>
-    <td><%= service.participant %></td>
-    <td><%= service.deleted_at %></td>
-    <td><%= link_to 'Show', service, :class => "btn btn-default" %></td>
-    <td><%= link_to 'Edit', edit_service_path(service), :class => "btn btn-default" %></td>
-    <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+    <td><%= s.persona.name %></td>
+    <td><%= s.user.full_name %></td>
+    <td><%= s.name %></td>
+    <td><%= s.description %></td>
+    <td><%= s.duration %></td>
+    <td><%= s.participant %></td>
+    <td><%= link_to 'Show', service_path(@page, s), :class => "btn btn-default" %></td>
+    <td><%= link_to 'Edit', edit_service_path(@page, s), :class => "btn btn-default" %></td>
+    <td><%= link_to 'Destroy', service_path(@page, s), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Service', new_service_path, :class => "btn btn-default" %>
+<%= link_to 'New Service', new_service_path(@page), :class => "btn btn-default" %>

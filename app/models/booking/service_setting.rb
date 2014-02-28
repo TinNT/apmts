@@ -1,7 +1,9 @@
 module Booking
   class ServiceSetting < ActiveRecord::Base
-    attr_accessible :day, :day_off, :from_hour, :from_min, :name, :service_id, :to_hour, :to_min
+    include MultiTenant::RandomPrimaryKeyHelper
     
     belongs_to :service
+    
+    #validates :service_id, :day, :presence => true
   end
 end

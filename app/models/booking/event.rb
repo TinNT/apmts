@@ -1,6 +1,6 @@
 module Booking
   class Event < ActiveRecord::Base
-    attr_accessible :description, :end_at, :entry_id, :service_id, :start_at
+    include MultiTenant::RandomPrimaryKeyHelper
     
     belongs_to :service
     belongs_to :entry
